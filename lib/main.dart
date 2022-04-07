@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,14 +34,17 @@ class _HomeState extends State<Home> {
   final String url = "https://api.github.com/users/hammadkahn";
   String? nameFromAPI;
   String? bioFromAPI;
+  String? urlFromAPI;
   bool loading = false;
 
+  // ignore: non_constant_identifier_names
   CallApi() async {
     var uri = Uri.parse(url);
     setState(() {
       loading = true;
       bioFromAPI = null;
       nameFromAPI = null;
+      urlFromAPI = null;
     });
     try {
       var response = await http.get(uri);
@@ -51,6 +53,7 @@ class _HomeState extends State<Home> {
       setState(() {
         nameFromAPI = parsedJson['name'];
         bioFromAPI = parsedJson['bio'];
+        urlFromAPI = parsedJson['url'];
       });
     } catch (e) {
       print(e);
@@ -72,13 +75,16 @@ class _HomeState extends State<Home> {
         ),
         body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text("NAME FROM GITHUB:"),
+            const Text("NAME FROM GITHUB:"),
             if (nameFromAPI != null) Text(nameFromAPI!),
-            if (loading) CircularProgressIndicator(),
-            Text("BIO FROM GITHUB:"),
+            if (loading) const CircularProgressIndicator(),
+            const Text("BIO FROM GITHUB:"),
             if (bioFromAPI != null) Text(bioFromAPI!),
-            if (loading) CircularProgressIndicator(),
-            ElevatedButton(onPressed: CallApi, child: Text("DABAOOOOO"))
+            if (loading) const CircularProgressIndicator(),
+            const Text("URL FROM GITHUB:"),
+            if (urlFromAPI != null) Text(urlFromAPI!),
+            if (loading) const CircularProgressIndicator(),
+            ElevatedButton(onPressed: CallApi, child: const Text("DABAOOOOO"))
           ]),
         ));
   }
