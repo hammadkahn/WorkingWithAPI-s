@@ -84,7 +84,8 @@ class _HomeState extends State<Home> {
             const Text("URL FROM GITHUB:"),
             if (urlFromAPI != null) Text(urlFromAPI!),
             if (loading) const CircularProgressIndicator(),
-            ElevatedButton(onPressed: CallApi, child: const Text("DABAOOOOO"))
+            ElevatedButton(onPressed: CallApi, child: const Text("DABAOOOOO")),
+            ElevatedButton(onPressed: CallApi, child: const Text("daba dooo"))
           ]),
         ));
   }
